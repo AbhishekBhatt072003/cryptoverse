@@ -3,14 +3,15 @@ import millify from 'millify'
 import { Typography, Row, Col, Statistic } from 'antd'
 import { Link } from 'react-router-dom'
 import { useGetCryptosQuery } from '../services/cryptoApi'
+import { Cryptocurrencies, News } from '../components'
+
 const { Title } = Typography
-
-
 const Homepage = () => {
 
     const { data, isFetching } = useGetCryptosQuery();
+    const globalStats = data?.data?.stats;
+    if (isFetching) return "Loading :";
 
-    console.log(data);
 
     return (
         <>
@@ -20,21 +21,38 @@ const Homepage = () => {
 
             <Row>
                 <Col span={12}>
-                    <Statistic title="Total Cryptocurrencies" value='5' />
+                    <Statistic title="Total Cryptocurrencies" value={globalStats.total} />
                 </Col>
                 <Col span={12}>
-                    <Statistic title="Total Exchange" value='5' />
+                    <Statistic title="Total Exchange" value={millify(globalStats.totalExchanges)} />
                 </Col>
                 <Col span={12}>
-                    <Statistic title="Total Market cap" value='5' />
+                    <Statistic title="Total Market cap" value={millify(globalStats.totalMarketCap)} />
                 </Col>
                 <Col span={12}>
-                    <Statistic title="Total 24h Volume" value='5' />
+                    <Statistic title="Total 24h Volume" value={millify(globalStats.total24Volume)} />
                 </Col>
                 <Col span={12}>
-                    <Statistic title="Total Markets" value='5' />
+                    <Statistic title="Total Markets" value={millify(globalStats.totalMarkets)} />
                 </Col>
             </Row>
+
+
+
+            <div className='home-heading-container'>
+                <Title level={2} className='home-title'>Top 10 crypto in the world</Title>
+                <Title level={3} className='show-more'><Link to='/cryptocurrencies'>Show more </Link> </Title>
+            </div>
+            <Cryptocurrencies simplified />
+
+            <div className='home-heading-container'>
+                <Title level={2} className='home-title'>Latest Crrypto News</Title>
+                <Title level={3} className='show-more'><Link to='/news'>Show more </Link> </Title>
+            </div>
+            <News simplified />
+
+
+
         </>
     )
 }
