@@ -8,7 +8,8 @@ import { Cryptocurrencies, News } from '../components'
 const { Title } = Typography
 const Homepage = () => {
 
-    const { data, isFetching } = useGetCryptosQuery();
+    const { data, isFetching } = useGetCryptosQuery(10);
+    console.log(data);
     const globalStats = data?.data?.stats;
     if (isFetching) return "Loading :";
 
@@ -30,7 +31,7 @@ const Homepage = () => {
                     <Statistic title="Total Market cap" value={millify(globalStats.totalMarketCap)} />
                 </Col>
                 <Col span={12}>
-                    <Statistic title="Total 24h Volume" value={millify(globalStats.total24Volume)} />
+                    <Statistic title="Total 24h Volume" value={millify(globalStats.total24hVolume)} />
                 </Col>
                 <Col span={12}>
                     <Statistic title="Total Markets" value={millify(globalStats.totalMarkets)} />
