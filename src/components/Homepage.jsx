@@ -34,7 +34,7 @@ const Homepage = () => {
                     <Statistic title="Total 24h Volume" value={millify(globalStats.total24hVolume)} />
                 </Col>
                 <Col span={12}>
-                    <Statistic title="Total Markets" value={millify(globalStats.totalMarkets)} />
+                    <Statistic title="Total Market" value={millify(globalStats.totalMarkets)} />
                 </Col>
             </Row>
 
